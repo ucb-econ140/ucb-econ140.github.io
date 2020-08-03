@@ -1,0 +1,111 @@
+.module {
+  @extend %card;
+
+  .module-days {
+    border-bottom: $border $border-color;
+    border-top: $border $border-color;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    margin: $sp-2 (-$sp-4);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include mq(lg) {
+      grid-template-columns: 1fr 7fr;
+    }
+
+    %module-item {
+      margin: 0;
+      padding: $sp-2;
+
+      @include mq(sm) {
+        padding: $sp-2 $sp-4;
+      }
+    }
+
+    .module-day {
+      @extend %module-item;
+      border-top: $border $border-color;
+      font-weight: normal;
+      grid-column-start: 1;
+      text-align: right;
+
+      +.module-event {
+        border-top: $border $border-color;
+      }
+
+      &:first-child {
+        border-top: none;
+
+        +.module-event {
+          border-top: none;
+        }
+      }
+
+      &::after {
+        content: ":";
+      }
+    }
+
+    .module-event {
+      @extend %module-item;
+      display: flex;
+      flex-direction: column;
+      grid-column-start: 2;
+
+      @include mq(sm) {
+        flex-direction: row;
+      }
+
+      +.module-event {
+        padding-top: 0;
+      }
+
+      p,
+      ol,
+      ul,
+      dl {
+        margin: 0;
+        flex: 1 0 62.5%;
+      }
+
+      p {
+        font-weight: 500;
+
+        +p {
+          flex-shrink: 1;
+        }
+      }
+    }
+
+    .label {
+      @extend %card-meta;
+      margin-left: 0;
+
+      &.label-hw-out {
+        @extend .label-yellow;
+      }
+
+      &.label-hw-due {
+        @extend .label-red;
+      }
+
+      &.label-section {
+        @extend .label-purple;
+      }
+    }
+  }
+}
+
+.module-meta {
+  @extend %card-meta, .text-grey-dk-100, .bg-grey-lt-200;
+}
+
+.module-header {
+  @extend .text-gamma;
+}
+
+.module-body {
+}
